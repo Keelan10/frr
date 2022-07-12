@@ -1712,6 +1712,22 @@ DEFPY (debug_mld_trace_detail,
 	return CMD_SUCCESS;
 }
 
+DEFPY (debug_pimv6_bsm,
+       debug_pimv6_bsm_cmd,
+       "[no] debug pimv6 bsm",
+       NO_STR
+       DEBUG_STR
+       DEBUG_PIMV6_STR
+       DEBUG_PIMV6_BSM_STR)
+{
+	if (!no)
+		PIM_DO_DEBUG_BSM;
+	else
+		PIM_DONT_DEBUG_BSM;
+
+	return CMD_SUCCESS;
+}
+
 void pim_cmd_init(void)
 {
 	if_cmd_init(pim_interface_config_write);
@@ -1855,6 +1871,7 @@ void pim_cmd_init(void)
 	install_element(ENABLE_NODE, &debug_mld_packets_cmd);
 	install_element(ENABLE_NODE, &debug_mld_trace_cmd);
 	install_element(ENABLE_NODE, &debug_mld_trace_detail_cmd);
+	install_element(ENABLE_NODE, &debug_pimv6_bsm_cmd);
 
 	install_element(CONFIG_NODE, &debug_pimv6_cmd);
 	install_element(CONFIG_NODE, &debug_pimv6_nht_cmd);
@@ -1873,4 +1890,5 @@ void pim_cmd_init(void)
 	install_element(CONFIG_NODE, &debug_mld_packets_cmd);
 	install_element(CONFIG_NODE, &debug_mld_trace_cmd);
 	install_element(CONFIG_NODE, &debug_mld_trace_detail_cmd);
+	install_element(CONFIG_NODE, &debug_pimv6_bsm_cmd);
 }
